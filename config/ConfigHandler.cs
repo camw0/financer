@@ -1,6 +1,5 @@
 using System.Text.Json;
 using static ConfigModel;
-using System.Text.Json.Serialization;
 
 public class ConfigHandler
 {
@@ -14,6 +13,6 @@ public class ConfigHandler
 
     public RootObject Read()
     {
-        return JsonSerializer.Deserialize<RootObject>(File.ReadAllText(FILE));
+        return JsonSerializer.Deserialize<RootObject>(File.ReadAllText(FILE))!;
     }
 }

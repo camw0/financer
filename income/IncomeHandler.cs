@@ -15,7 +15,7 @@ public class IncomeHandler
         int hoursProjected = Convert.ToInt32(Console.ReadLine());
 
         Console.WriteLine($"(3/3) Is the rate of pay still £{RATE}/hour? y/n");
-        char rateConfirmation = Convert.ToChar(Console.ReadLine().ToLower());
+        char rateConfirmation = Convert.ToChar(Console.ReadLine()!.ToLower());
 
         if (rateConfirmation != 'y')
         {
@@ -29,7 +29,7 @@ public class IncomeHandler
         Console.WriteLine($"-------------\nPay rate: £{RATE}\n-------------");
 
         Console.WriteLine("Is the above information correct? y/n");
-        char summaryConfirmation = Convert.ToChar(Console.ReadLine().ToLower());
+        char summaryConfirmation = Convert.ToChar(Console.ReadLine()!.ToLower());
 
         if (summaryConfirmation != 'y')
         {
