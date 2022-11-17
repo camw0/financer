@@ -7,5 +7,6 @@ public class ConfigModel
         public int hours { get; set; }
         public int spend { get; set; }
         public int save { get; set; }
+        public DateTime lastLogged { get; set; }
     }
 }

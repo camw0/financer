@@ -1,49 +1,54 @@
+using static ConfigModel;
+
 public class IncomeHandler
 {
     public const double TAX = 0.00;
-    public double RATE = 10.41;
     public const double INSURANCE = 0.00;
 
     public void Process()
     {
+        Logger log = new();
+        ConfigHandler config = new();
+
         Console.Clear();
 
-        Console.WriteLine("(1/3) Enter hours worked this month:");
-        int hoursWorked = Convert.ToInt32(Console.ReadLine());
+        log.Input("(>) How many hours have you worked this month? (e.g. 12): ");
+        double worked = Convert.ToDouble(Console.ReadLine());
 
-        Console.WriteLine("(2/3) Enter projected hours for this month:");
-        int hoursProjected = Convert.ToInt32(Console.ReadLine());
+        log.Input("(>) What are your projected hours for this month? (e.g. 24): ");
+        double projected = Convert.ToDouble(Console.ReadLine());
 
-        Console.WriteLine($"(3/3) Is the rate of pay still £{RATE}/hour? y/n");
-        char rateConfirmation = Convert.ToChar(Console.ReadLine()!.ToLower());
+        log.Input($"(>) Is the rate of pay still £{config.Read()!.rate}/hour? (y/n):");
 
-        if (rateConfirmation != 'y')
+        if (Convert.ToChar(Console.ReadLine()!.ToLower()) != 'y')
         {
-            Console.Write("(3/3) Please enter the new rate:");
-            double newRate = Convert.ToDouble(Console.ReadLine());
-            RATE = newRate;
+            log.Input("(>) What is the new rate of pay? (e.g. 15.04):");
+            config.Write(new RootObject { rate = Convert.ToDouble(Console.ReadLine()) });
         }
 
-        Console.WriteLine($"---Summary---\nHours: {hoursWorked}\nProjected: {hoursProjected}");
-        Console.WriteLine($"-------------\nInsurance: {INSURANCE}%\nTax rate: {TAX}%");
-        Console.WriteLine($"-------------\nPay rate: £{RATE}\n-------------");
+        log.Info(
+            $"---Summary---\nHours: {worked}\nProjected: {projected}" +
+            $"\nInsurance: {INSURANCE}%\nTax rate: {TAX}%" +
+            $"\nPay rate: £{config.Read()!.rate}\n-------------"
+        );
 
-        Console.WriteLine("Is the above information correct? y/n");
-        char summaryConfirmation = Convert.ToChar(Console.ReadLine()!.ToLower());
+        log.Input("(>) Is the above information correct? (y/n):");
 
-        if (summaryConfirmation != 'y')
+        if (Convert.ToChar(Console.ReadLine()!.ToLower()) != 'y')
         {
-            Console.WriteLine("Income processing failed due to user cancellation.");
+            log.Warn("(/) Income processing failed due to user cancellation.");
         }
 
-        double total = RATE * hoursProjected;
+        double total = config.Read()!.rate * projected;
         double spending = Math.Floor(total / 4);
         double saving = Math.Floor(total / 1.75);
 
-        Console.WriteLine("Projected earnings: £" + total);
-        Console.WriteLine("Projected savings: £" + saving);
-        Console.WriteLine("Projected spending: £" + spending);
+        log.Success(
+            $"\nProjected earnings: £{total}\nProjected savings: £{saving}\nProjected spending: £{spending}" +
+            $"Estimated free income (after general spending + savings): £{(int)(total - (spending + saving))}" +
+            "\n(i) Press 'enter' to return home."
+        );
 
-        Console.WriteLine("Estimated free income (after general spending + savings): £" + (int)(total - (spending + saving)));
+        while (Console.ReadKey().Key != ConsoleKey.Enter) continue;
     }
 }

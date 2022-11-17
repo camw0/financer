@@ -7,12 +7,29 @@ public class ConfigHandler
 
     public void Write(RootObject obj)
     {
-        File.WriteAllText(FILE, JsonSerializer.Serialize(obj));
+        try
+        {
+            File.WriteAllText(FILE, JsonSerializer.Serialize(obj));
+        }
+        catch (FileLoadException e)
+        {
+            new Logger().Error("(x)Unable to write to config file: " + e.Message);
+        }
+
         return;
     }
 
-    public RootObject Read()
+    public RootObject? Read()
     {
-        return JsonSerializer.Deserialize<RootObject>(File.ReadAllText(FILE))!;
+        try
+        {
+            return JsonSerializer.Deserialize<RootObject>(File.ReadAllText(FILE))!;
+        }
+        catch(FileNotFoundException e)
+        {
+            new Logger().Error("(x) Unable to read config file: " + e.Message);
+        }
+
+        return null;
     }
 }

@@ -5,6 +5,8 @@
 
 # financer-specific files
 config.json
+logs/*
+!logs/.gitkeep
 
 # User-specific files
 *.suo
