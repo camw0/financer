@@ -18,11 +18,11 @@ public class IncomeHandler
         log.Input("(>) What are your projected hours for this month? (e.g. 24): ");
         double projected = Convert.ToDouble(Console.ReadLine());
 
-        log.Input($"(>) Is the rate of pay still £{config.Read()!.rate}/hour? (y/n):");
+        log.Input($"(>) Is the rate of pay still £{config.Read()!.rate}/hour? (y/n): ");
 
         if (Convert.ToChar(Console.ReadLine()!.ToLower()) != 'y')
         {
-            log.Input("(>) What is the new rate of pay? (e.g. 15.04):");
+            log.Input("(>) What is the new rate of pay? (e.g. 15.04): ");
             config.Write(new RootObject { rate = Convert.ToDouble(Console.ReadLine()) });
         }
 
@@ -32,7 +32,7 @@ public class IncomeHandler
             $"\nPay rate: £{config.Read()!.rate}\n-------------"
         );
 
-        log.Input("(>) Is the above information correct? (y/n):");
+        log.Input("(>) Is the above information correct? (y/n): ");
 
         if (Convert.ToChar(Console.ReadLine()!.ToLower()) != 'y')
         {

@@ -29,7 +29,7 @@ public class HourHandler
             $"\nHourly rate: £{config.Read()?.rate}\nToday\'s total: £{config.Read()?.rate * hours}{BORDER}"
         );
 
-        log.Warn("(/)Writing data...");
+        log.Warn("(/) Writing data...");
 
         try
         {
