@@ -1,38 +1,40 @@
 public class Logger
 {
-    public void Input(string text)
+    public void New(string? type, string text)
     {
+        switch(type)
+        {
+            case "input":
+                SetColor(ConsoleColor.White);
+                Console.Write("(>) " + text);
+                break;
+            case "success":
+                SetColor(ConsoleColor.Green);
+                Console.Write("(i) " + text);
+                break;
+            case "info":
+                SetColor(ConsoleColor.Cyan);
+                Console.Write("(i) " + text);
+                break;
+            case "warn":
+                SetColor(ConsoleColor.Yellow);
+                Console.Write("(/) " + text);
+                break;
+            case "error":
+                SetColor(ConsoleColor.Red);
+                Console.Write("(x) " + text);
+                break;
+            default:
+                SetColor(ConsoleColor.Red);
+                Console.Write(text);
+                break;
+            
+        }
         Console.ForegroundColor = ConsoleColor.White;
-        Console.Write("(>) " + text);
     }
 
-    public void Success(string text)
+    private void SetColor(ConsoleColor color)
     {
-        Console.ForegroundColor = ConsoleColor.Green;
-        Console.WriteLine("(i) " + text);
-        Console.ForegroundColor = ConsoleColor.White;
-    }
-
-    public void Info(string text, bool color = true)
-    {
-        if (!color) Console.ForegroundColor = ConsoleColor.White;
-        else Console.ForegroundColor = ConsoleColor.Cyan;
-
-        Console.WriteLine("(i) " + text);
-        Console.ForegroundColor = ConsoleColor.White;
-    }
-
-    public void Warn(string text)
-    {
-        Console.ForegroundColor = ConsoleColor.Yellow;
-        Console.WriteLine("(/) " + text);
-        Console.ForegroundColor = ConsoleColor.White;
-    }
-
-    public void Error(string text)
-    {
-        Console.ForegroundColor = ConsoleColor.Red;
-        Console.WriteLine("(x) " + text);
-        Console.ForegroundColor = ConsoleColor.White;
+        Console.ForegroundColor = color;
     }
 }

@@ -15,13 +15,13 @@ public class ConfigHandler
         }
         catch (FileLoadException e)
         {
-            log.Error("Unable to write to config file: " + e.Message);
+            log.New("error", "Unable to write to config file: " + e.Message);
         }
 
         return;
     }
 
-    public RootObject? Read()
+    public RootObject Read()
     {
         string data;
         Logger log = new();
@@ -33,9 +33,9 @@ public class ConfigHandler
         catch(FileNotFoundException e)
         {
             data = ""; // No configuration available
-            log.Error("Unable to read config file: " + e.Message);
+            log.New("error", "Unable to read config file: " + e.Message);
         }
         
-        return JsonSerializer.Deserialize<RootObject>(data);
+        return JsonSerializer.Deserialize<RootObject>(data)!;
     }
 }

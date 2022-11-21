@@ -3,8 +3,8 @@
     Logger log = new();
 
     Console.Clear();
-    if (!hasFailed) log.Success("Welcome to Financer -\nan all-in-one CLI finance management application.\n");
-    else log.Error("Invalid option. Please select from the following below:\n");
+    if (!hasFailed) log.New("success", "Welcome to Financer -\nan all-in-one CLI finance management application.\n\n");
+    else log.New("error", "Invalid option. Please select from the following below:\n\n");
 
     ShowOptions();
 }
