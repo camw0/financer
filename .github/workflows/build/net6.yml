@@ -1,0 +1,26 @@
+name: Build
+'on':
+  push:
+    branches:
+      - dev
+  pull_request:
+    branches:
+      - dev
+jobs:
+  build:
+    name: .NET 6
+    runs-on: ubuntu-latest
+    steps:
+      - uses: AutoModality/action-clean@v1
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: Setup .NET Core 6.0
+        uses: actions/setup-dotnet@v1
+        with:
+          dotnet-version: 6.0.x
+      - name: Restore dependencies
+        run: dotnet restore
+      - name: Build
+        run: dotnet build --no-restore
+      - name: Test
+        run: dotnet test --no-build --verbosity normal
