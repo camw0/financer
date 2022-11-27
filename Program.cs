@@ -1,9 +1,10 @@
-﻿void Start(bool hasFailed = false)
+﻿void Start(bool badInput = false)
 {
     Logger log = new();
 
     Console.Clear();
-    if (!hasFailed) log.New("success", "Welcome to Financer -\nan all-in-one CLI finance management application.\n\n");
+
+    if (!badInput) log.New("success", "Welcome to Financer -\nan all-in-one CLI finance management application.\n\n");
     else log.New("error", "Invalid option. Please select from the following below:\n\n");
 
     ShowOptions();
