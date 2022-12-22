@@ -1,5 +1,5 @@
 <h1 align="center">Financer</h1>
-<h3 align="center"><strong>A simple CLI finance assistant</strong></h3>
+<h3 align="center"><strong>A simple CLI finance assistant for calculating monthly expenses.</strong></h3>
 
 ## Introduction
 
